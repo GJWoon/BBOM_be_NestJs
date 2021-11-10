@@ -12,6 +12,8 @@ import { ContentImage } from './content/entities/content-image';
 import { ContentLike } from './content/entities/content-like';
 import { UserModule } from './user/user.module';
 import { User } from './user/entities/user';
+import { UserController } from './user/user.controller';
+import { UserService } from './user/user.service';
 
 @Module({
   imports: [
@@ -29,13 +31,13 @@ import { User } from './user/entities/user';
       database: process.env.DATABASE,
       autoLoadEntities: true,
       logging: true,
-      synchronize: true,
+      synchronize: false,
     }),
     UserModule
 
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, UserController],
+  providers: [AppService, UserService],
 
 
 })
