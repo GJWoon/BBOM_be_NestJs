@@ -10,7 +10,6 @@ export class ResponseInterCeptor<T> implements NestInterceptor<T, Response<T>> {
     intercept(context: ExecutionContext, next: CallHandler): Observable<Response<T>> {
         return next.handle().pipe(map(data => (this.mapReponse(data))));
     }
-    
 
     mapReponse(data: any) {
         return {

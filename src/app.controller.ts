@@ -8,8 +8,6 @@ export class AppController {
   @Get()
   getHello(): string {
 
-      "hiddgisdsdsdt "
     return this.appService.getHello();
-
   }
 }
