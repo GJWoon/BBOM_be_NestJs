@@ -33,6 +33,7 @@ import { UserService } from './user/user.service';
       logging: true,
       synchronize: false,
     }),
+    
     UserModule
 
   ],
