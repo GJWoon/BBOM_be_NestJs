@@ -15,6 +15,9 @@ import { UserService } from './user/user.service';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Module } from '@nestjs/common';
+import { MulterModule } from '@nestjs/platform-express';
+import { ResourceApi } from './common/resource.api';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -34,11 +37,17 @@ import { Module } from '@nestjs/common';
       logging: true,
       synchronize: false,
     }),
-    
-    UserModule
+
+    UserModule,
+    MulterModule.register({
+      dest: 'upload',
+
+    }),
+    AuthModule,
+
 
   ],
-  controllers: [AppController, UserController],
+  controllers: [AppController, UserController,ResourceApi],
   providers: [AppService, UserService],
 
 

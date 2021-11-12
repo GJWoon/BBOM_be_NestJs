@@ -13,8 +13,9 @@ export class ResponseInterCeptor<T> implements NestInterceptor<T, Response<T>> {
 
     mapReponse(data: any) {
         return {
+            status: HttpStatus.OK,
             data: data,
-            status: HttpStatus.OK
+
         }
     }
 }

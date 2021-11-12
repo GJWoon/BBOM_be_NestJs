@@ -19,13 +19,16 @@ export class User {
     @Column('varchar', { name: 'password' })
     password: string;
 
+    @Column('varchar',{name:'profileImage'})
+    profileImage:string;
+
     @CreateDateColumn()
     createdDate: Date;
 
     @UpdateDateColumn()
     updatedDate: Date;
     
-    constructor(nickName: string, email: string, phone: string, hashpassword: string) {
+    constructor(email: string, nickName: string, phone: string, hashpassword: string) {
         this.email = email;
         this.nickName = nickName;
         this.phone = phone;
