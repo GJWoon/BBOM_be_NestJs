@@ -13,8 +13,6 @@ export class ContentController {
     @Post()
     @ApiBody({ type: ContentDto })
     async postContent(@Body() dto: ContentDto) {
-
         console.log(dto);
-
     }
 }
