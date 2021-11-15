@@ -25,6 +25,9 @@ export  class ClothesInfo{
     @Column('varchar',{name:'size'})
     size:string;
 
+    @Column('varchar',{name:'comment'})
+    comment:string;
+
     @ManyToOne(()=> Content)
     @JoinColumn({name:'content_id',referencedColumnName:'id'}   )
     content:Content;

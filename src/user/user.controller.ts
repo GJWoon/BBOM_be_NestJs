@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Query, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiConsumes, ApiOperation } from '@nestjs/swagger';
+import { ApiBasicAuth, ApiBearerAuth, ApiConsumes, ApiHeaders, ApiOperation, ApiSecurity } from '@nestjs/swagger';
 import { Multer } from 'multer';
 import { ResponseInterCeptor } from 'src/common/transform-reponse';
 import { ResisterDto } from './dto/resister-user.dto';
@@ -32,17 +32,11 @@ export class UserController {
         return await this.userService.duplicateCheckUserEmail(email);
     }
 
-    
-    @Get('/test')
-    async test(@Jwt() token:string){
-        console.log(token);
-    }
-    // @ApiOperation({ summary: '로그인' })
-    // @Post("/login")
-    // @UseGuards(LocalAuthGuard)
-    // async login(@Body() dto: LoginDto) {
-    //     this.authService.login(dto);
-    //     return null;
-    // }
 
+    @ApiBearerAuth('JWT')
+    @UseGuards(AuthGuard('jwt'))
+    @Get('/test')
+    async test(@Jwt() token: string) {
+        console.log('decorator Jwt', token);
+    }
 }

@@ -8,6 +8,7 @@ import { HttpExceptionFilter } from './httpException.filter';
 import path from 'path';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import passport from 'passport';
+import { Jwt } from './common/jwt-current-user.decorator';
 declare const module: any;
 
 
@@ -22,15 +23,15 @@ declare const module: any;
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, { bodyParser: true });
 
-  app.useGlobalInterceptors(new ResponseInterCeptor());
+  app.useGlobalInterceptors(new ResponseInterCeptor)
   app.useGlobalFilters(new HttpExceptionFilter());
   let config: Omit<OpenAPIObject, 'paths'>;
   // eslint-disable-next-line prefer-const
   config = new DocumentBuilder()
-    .setTitle('Sleact API')
-    .setDescription('Sleact 개발을 위한 API 문서입니다.')
+    .setTitle('BBOM API')
+    .setDescription('BBOM 개발을 위한 API 문서입니다.')
     .setVersion('1.0')
-    .addCookieAuth('connect.sid')
+    .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }, 'JWT')
     .build();
   const document = SwaggerModule.createDocument(app, config);
 

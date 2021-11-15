@@ -44,8 +44,13 @@ export class AuthService {
         }
         return {
             user: { user },
-            token: this.jwtService.sign(payload)
+            token: `Bearer ${this.jwtService.sign(payload)}`
         }
+    }
+
+    async getUser(id: number) {
+        return await this.userRepository.createQueryBuilder('u')
+            .where('u.id = :id', { id: id }).getOne();
     }
 
 }

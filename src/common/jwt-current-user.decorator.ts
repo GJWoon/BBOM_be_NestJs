@@ -1,21 +1,16 @@
-import { createParamDecorator, ExecutionContext, UnauthorizedException } from "@nestjs/common";
+import { createParamDecorator, ExecutionContext, Inject, UnauthorizedException } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
+import { resolveObjectURL } from "buffer";
 import { Request } from "express";
+import { AuthService } from "src/auth/auth.service";
+import { User } from "src/user/entities/user";
+
+
 
 
 export const Jwt = createParamDecorator(
-
     (data: unknown, ctx: ExecutionContext) => {
-        const request = ctx.switchToHttp().getRequest<Request>();
-
-        const token = request.headers.authorization;
-
-        if (!token) {
-            throw new UnauthorizedException('토큰이 존재 하지 않습니다.')
-        }
-
-        return token;
+        const request = ctx.switchToHttp().getRequest();
+        return request.user;
     }
-
-
-
 )
