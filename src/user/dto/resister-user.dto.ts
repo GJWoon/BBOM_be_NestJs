@@ -37,4 +37,18 @@ export class ResisterDto {
     @IsNotEmpty()
     public password: string;
 
+
+    @ApiProperty({
+        description: 'Attachments',
+        type: 'file',
+        items: {
+            type: 'file',
+            items: {
+                type: 'string',
+                format: 'binary',
+            },
+        },
+    })
+    image: any;
+
 }

@@ -1,16 +1,22 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { info } from 'console';
-import { Connection } from 'typeorm';
+import { IPaginationOptions, paginate } from 'nestjs-typeorm-paginate';
+import { Page } from 'src/common/dto/page.dto';
+import { Connection, Repository } from 'typeorm';
 import { ClothesInfoDto } from './dto/clothes-info.dto';
 import { ContentDto } from './dto/content.dto';
 import { ClothesInfo } from './entities/clothes-info';
 import { ClothesInfoImage } from './entities/clothes-info-image';
 import { Content } from './entities/content';
+import { ContentRepository } from './repository/content.repostiory';
 
 @Injectable()
 export class ContentService {
 
-    constructor(private connection: Connection) { }
+    constructor(private connection: Connection,
+        private contentRepository: ContentRepository
+    ) { }
 
     async postContnet(dto: ContentDto, infoImageList: Express.Multer.File[], contentImageList: Express.Multer.File[]) {
         const queryRunner = this.connection.createQueryRunner();
@@ -49,9 +55,13 @@ export class ContentService {
             i = i + 1;
         })
         return clothesInList;
-
     }
 
 
+    async getContentPaging(page: number, limit: number, query: string) {
+
+        const result = await this.contentRepository.getContentPaging(page, limit, query);
+        return new Page(result[1], page, result[0]);
+    }
 
 }

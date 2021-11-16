@@ -18,6 +18,7 @@ export class UserController {
     constructor(private userService: UserService,
     ) { }
 
+    @ApiConsumes('multipart/form-data')
     @ApiOperation({ summary: '회원가입' })
     @UseInterceptors(FileInterceptor('image'))
     @Post()

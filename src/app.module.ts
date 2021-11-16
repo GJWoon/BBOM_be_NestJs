@@ -20,6 +20,7 @@ import { ResourceApi } from './common/resource.api';
 import { AuthModule } from './auth/auth.module';
 import { ContentController } from './content/content.controller';
 import { ContentService } from './content/content.service';
+import { ContentRepository } from './content/repository/content.repostiory';
 
 @Module({
   imports: [
@@ -27,7 +28,7 @@ import { ContentService } from './content/content.service';
       isGlobal: true,
     }),
     ContentModule,
-    TypeOrmModule.forFeature([ClothesInfo, ClothesInfoImage, Content, ContentImage, ContentLike, User]),
+    TypeOrmModule.forFeature([ClothesInfo, ClothesInfoImage, Content, ContentImage, ContentLike, User, ContentRepository]),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -37,7 +38,7 @@ import { ContentService } from './content/content.service';
       database: process.env.DATABASE,
       autoLoadEntities: true,
       logging: true,
-      synchronize: true,
+      synchronize: false,
     }),
 
     UserModule,
@@ -50,7 +51,7 @@ import { ContentService } from './content/content.service';
 
   ],
   controllers: [AppController, UserController, ResourceApi, ContentController],
-  providers: [AppService, UserService,ContentService],
+  providers: [AppService, UserService, ContentService],
 
 
 })

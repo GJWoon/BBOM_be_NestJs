@@ -8,11 +8,12 @@ import { ClothesInfoImage } from './entities/clothes-info-image';
 import { Content } from './entities/content';
 import { ContentImage } from './entities/content-image';
 import { ContentLike } from './entities/content-like';
+import { ContentRepository } from './repository/content.repostiory';
 
 @Module({
   controllers: [ContentController],
   providers: [ContentService],
-  imports: [TypeOrmModule.forFeature([ClothesInfo, ClothesInfoImage, Content, ContentImage, ContentLike])],
+  imports: [TypeOrmModule.forFeature([ClothesInfo, ClothesInfoImage, Content, ContentImage, ContentLike, ContentRepository])],
 
 })
 export class ContentModule { }
