@@ -1,4 +1,6 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { ContentDto } from "../dto/content.dto";
+import { ClothesInfo } from "./clothes-info";
 import { ContentImage } from "./content-image";
 import { ContentLike } from "./content-like";
 
@@ -23,12 +25,25 @@ export class Content {
     @Column('boolean', { name: 'isBodyStyleShow' })
     isBodyStyleShow: boolean;
 
-    @OneToMany(() => ContentImage, (contentImages) => contentImages.content)
+    @OneToMany(() => ContentImage, (contentImages) => contentImages.content, { cascade: true, onUpdate: 'RESTRICT' })
     contentImages: ContentImage[];
 
     @OneToMany(() => ContentLike, (contentLikes) => contentLikes.content)
     contentLikes: ContentLike[];
 
 
+    @OneToMany(() => ClothesInfo, (clothesInfo) => clothesInfo.content, { cascade: true, onUpdate: 'CASCADE' })
+    clohtesInfos: ClothesInfo[];
+
+
+    static create(dto: ContentDto) {
+
+        let content: Content = new Content;
+
+        content.content = dto.content;
+        content.isBodyStyleShow = dto.isBodyStyleShow;
+        return content;
+
+    }
 
 }

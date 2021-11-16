@@ -1,9 +1,9 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, Reflector } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule, OpenAPIObject } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ResponseInterCeptor } from './common/transform-reponse';
 import fs, { mkdir } from 'fs';
-import { ValidationPipe } from '@nestjs/common';
+import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from './httpException.filter';
 import path from 'path';
 import { NestExpressApplication } from '@nestjs/platform-express';
@@ -22,8 +22,10 @@ declare const module: any;
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, { bodyParser: true });
-
+  app.enableCors();
   app.useGlobalInterceptors(new ResponseInterCeptor)
+  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+  app.useGlobalPipes(new ValidationPipe);
   app.useGlobalFilters(new HttpExceptionFilter());
   let config: Omit<OpenAPIObject, 'paths'>;
   // eslint-disable-next-line prefer-const
@@ -36,7 +38,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
 
   app.useStaticAssets(
-    path.join(__dirname, '..', 'upload'),
+    path.join('/Users/geumjiun/Desktop/GJWoon/BBOM/bbom'),
     {
       prefix: '/upload',
     },

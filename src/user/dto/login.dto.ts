@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 
 
-export class LoginDto{
+export class LoginDto {
 
     @ApiProperty({
         description: '이메일',
@@ -19,4 +19,18 @@ export class LoginDto{
     @IsString()
     @IsNotEmpty()
     public password: string;
+
+    @ApiProperty({
+        description: 'Attachments',
+        type: 'file',
+        items: {
+            type: 'file',
+            items: {
+                type: 'string',
+                format: 'binary',
+            },
+        },
+    })
+    contentImages: any;
+
 }

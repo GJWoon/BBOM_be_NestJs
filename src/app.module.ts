@@ -18,6 +18,8 @@ import { Module } from '@nestjs/common';
 import { MulterModule } from '@nestjs/platform-express';
 import { ResourceApi } from './common/resource.api';
 import { AuthModule } from './auth/auth.module';
+import { ContentController } from './content/content.controller';
+import { ContentService } from './content/content.service';
 
 @Module({
   imports: [
@@ -35,7 +37,7 @@ import { AuthModule } from './auth/auth.module';
       database: process.env.DATABASE,
       autoLoadEntities: true,
       logging: true,
-      synchronize: false,
+      synchronize: true,
     }),
 
     UserModule,
@@ -47,8 +49,8 @@ import { AuthModule } from './auth/auth.module';
 
 
   ],
-  controllers: [AppController, UserController,ResourceApi],
-  providers: [AppService, UserService],
+  controllers: [AppController, UserController, ResourceApi, ContentController],
+  providers: [AppService, UserService,ContentService],
 
 
 })
