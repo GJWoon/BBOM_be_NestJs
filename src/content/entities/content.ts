@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { ContentDto } from "../dto/content.dto";
-import { ClothesInfo } from "./clothes-info";
+import { ClothesInfo } from "./clothes-info.entity";
 import { ContentImage } from "./content-image";
 import { ContentLike } from "./content-like";
 

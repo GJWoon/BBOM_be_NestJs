@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty, IsString } from "class-validator";
-import { ClothesInfo } from "../entities/clothes-info";
+import { ClothesInfo } from "../entities/clothes-info.entity";
 import { ClothesInfoDto } from "./clothes-info.dto";
 
 

@@ -1,5 +1,5 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { ClothesInfo } from "./clothes-info";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { ClothesInfo } from "./clothes-info.entity";
 
 @Entity({ name: 'clothes_info_images' })
 export class ClothesInfoImage {

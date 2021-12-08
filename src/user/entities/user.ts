@@ -1,13 +1,13 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity({ name: 'user' })
+@Entity({ name: 'user', synchronize: true })
 export class User {
 
 
     @PrimaryGeneratedColumn({ name: 'id', type: 'int' })
     id: number;
 
-    @Column('varchar', { name: 'nickName' })
+    @Column({ name: 'nickName' })
     nickName: string;
 
     @Column('varchar', { name: 'email', unique: true })
@@ -16,18 +16,18 @@ export class User {
     @Column('varchar', { name: 'phone' })
     phone: string;
 
-    @Column('varchar', { name: 'password' })
+    @Column({ name: 'password', type: 'varchar' })
     password: string;
 
-    @Column('varchar',{name:'profileImage'})
-    profileImage:string;
+    @Column()
+    profileImage: string;
 
     @CreateDateColumn()
     createdDate: Date;
 
     @UpdateDateColumn()
     updatedDate: Date;
-    
+
     constructor(email: string, nickName: string, phone: string, hashpassword: string) {
         this.email = email;
         this.nickName = nickName;

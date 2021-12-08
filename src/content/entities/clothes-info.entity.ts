@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { ClothesInfoDto } from "../dto/clothes-info.dto";
-import { ClothesInfoImage } from "./clothes-info-image";
+import { ClothesInfoImage } from "./clothes-info-image.entity";
 import { Content } from "./content";
 
 

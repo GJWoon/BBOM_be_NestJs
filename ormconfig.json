@@ -1,0 +1,14 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "port ": 3306,
+  "username": "root",
+  "password": "9722",
+  "database": "bbom",
+  "autoLoadEntities": true,
+  "logging": true,
+  "synchronize": true,
+  "entities": [
+    "dist/**/entities/*.{ts,js}"
+  ]
+}

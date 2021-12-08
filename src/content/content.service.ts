@@ -3,11 +3,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { info } from 'console';
 import { IPaginationOptions, paginate } from 'nestjs-typeorm-paginate';
 import { Page } from 'src/common/dto/page.dto';
-import { Connection, Repository } from 'typeorm';
+import { Connection } from 'typeorm';
 import { ClothesInfoDto } from './dto/clothes-info.dto';
 import { ContentDto } from './dto/content.dto';
-import { ClothesInfo } from './entities/clothes-info';
-import { ClothesInfoImage } from './entities/clothes-info-image';
+import { ClothesInfo } from './entities/clothes-info.entity';
+import { ClothesInfoImage } from './entities/clothes-info-image.entity';
 import { Content } from './entities/content';
 import { ContentRepository } from './repository/content.repostiory';
 
